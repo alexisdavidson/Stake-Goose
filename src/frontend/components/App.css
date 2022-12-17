@@ -21,33 +21,6 @@ body {
   z-index: -39;
 }
 
-.Farm {
-  background-image: url("./assets/farm.jpg");
-}
-.Castle_1 {
-  background-image: url("./assets/castle/Castle_1.jpg");
-}
-.Castle_2 {
-  background-image: url("./assets/castle/Castle_2.jpg");
-}
-.Castle_3 {
-  background-image: url("./assets/castle/Castle_3_Goose.jpg");
-}
-.Castle_35 {
-  background-image: url("./assets/castle/Castle_3_Treasure.jpg");
-}
-.Castle_4 {
-  background-image: url("./assets/castle/Castle_4_Goose.jpg");
-}
-.Castle_45 {
-  background-image: url("./assets/castle/Castle_4_Treasure.jpg");
-}
-.Castle_5 {
-  background-image: url("./assets/castle/Castle_5_Goose.jpg");
-}
-.Castle_55 {
-  background-image: url("./assets/castle/Castle_5_Treasure.jpg");
-}
 
 .treasure, .goose {
   /* background-color: rgb(.5,.5,.5,.5); */
@@ -177,32 +150,6 @@ a:link, a:visited, a:hover, a:active {
   line-height: 1.3rem;
 }
 
-.shortButton {
-  /* Button image dimensions: 309px * 155px */
-  background-image: url("./assets/button_short.png");
-  height: 9rem;
-  z-index: 1;
-}
-
-.longButton {
-  background-image: url("./assets/button_long.png");
-  width: 40rem;
-  height: 9rem;
-  z-index: 1;
-  padding-left: 8vh;
-  padding-right: 8vh;
-}
-
-.longMobileButton {
-  background-image: url("./assets/mobile/longButtonMobile.png");
-  width: 23rem;
-  height: 10rem;
-  padding: 6vh;
-  line-height: 1.6rem;
-  margin-top: 4vh;
-  z-index: 1;
-}
-
 .actionButton:hover, .shortButton:hover {
   cursor: pointer;
 }
@@ -243,37 +190,6 @@ a:link, a:visited, a:hover, a:active {
   
   display: flex;
   align-items: flex-end;
-}
-
-.plantDiv {
-  position: absolute;
-  bottom: 2%;
-  left: 0; 
-  right: 0; 
-  margin-left: auto; 
-  margin-right: auto;
-  padding: 0;
-}
-
-.plant:hover, .plantDiv:hover {
-  cursor: pointer;
-}
-
-.plant_0, .plant_1, .plant_2, .plant_3, .plant_4 {
-  width: 20%;
-}
-
-.plant_5 {
-  width: 100%;
-}
-
-.FarmLastPlant{
-  background-image: url("./assets/plant_4.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center; 
-  width: 100%;
-  height: 100%;
 }
 
 .textFrame, .ticketsFrame, .mintFrame {
@@ -350,31 +266,6 @@ a:link, a:visited, a:hover, a:active {
   left: 55%;
 }
 
-.Castle_1 {
-  background-image: url("./assets/castle/mobile/Castle_1.jpg");
-}
-.Castle_2 {
-  background-image: url("./assets/castle/mobile/Castle_2.jpg");
-}
-.Castle_3 {
-  background-image: url("./assets/castle/mobile/Castle_3_Goose.jpg");
-}
-.Castle_35 {
-  background-image: url("./assets/castle/mobile/Castle_3_Treasure.jpg");
-}
-.Castle_4 {
-  background-image: url("./assets/castle/mobile/Castle_4_Goose.jpg");
-}
-.Castle_45 {
-  background-image: url("./assets/castle/mobile/Castle_4_Treasure.jpg");
-}
-.Castle_5 {
-  background-image: url("./assets/castle/mobile/Castle_5_Goose.jpg");
-}
-.Castle_55 {
-  background-image: url("./assets/castle/mobile/Castle_5_Treasure.jpg");
-}
-
 
   .actionFrame {
     background-image: url("./assets/mobile/mobile_menu.png");
@@ -383,9 +274,6 @@ a:link, a:visited, a:hover, a:active {
     width: 100%;
     height: 80%;
     padding-top: 8vh;
-  }
-  .actionMintFrame {
-    background-image: url("./assets/mobile/mint_menu.png");
   }
   .logo {
     width: 95%;
@@ -400,13 +288,6 @@ a:link, a:visited, a:hover, a:active {
     background-position: 0 0;
   }
 
-  .Farm {
-    background-image: url("./assets/mobile/farm.png");
-  }
-
-  .MintBg {
-    background-image: url("./assets/mobile/mint_bg.png");
-  }
   
 
   .navbarMobileDiv {
