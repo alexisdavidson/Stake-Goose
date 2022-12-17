@@ -313,7 +313,9 @@ a:link, a:visited, a:hover, a:active {
 
 
 
-
+.socialLink {
+  margin-bottom: 4vh;
+}
 
 
 
@@ -326,6 +328,20 @@ a:link, a:visited, a:hover, a:active {
 
 @media only screen and (max-width: 1199.98px){
   
+.actionTitle {
+  margin-left: 0;
+  padding-left: 0;
+  font-size: 1.8rem;
+}
+
+.actionDescription {
+  /* font-size: 2rem; */
+  padding-right: 2rem;
+}
+.actionDescriptionBig {
+  font-size: 2rem;
+  padding-left: 2rem;
+}
 .treasure, .goose {
   left: 0%;
   width: 48%;
@@ -362,7 +378,7 @@ a:link, a:visited, a:hover, a:active {
 
   .actionFrame {
     background-image: url("./assets/mobile/mobile_menu.png");
-    top : 15%;
+    top : 10%;
     left : 0%;
     width: 100%;
     height: 80%;
@@ -373,6 +389,9 @@ a:link, a:visited, a:hover, a:active {
   }
   .logo {
     width: 95%;
+  }
+  .logoDiv {
+    top: 10%;
   }
   
 
