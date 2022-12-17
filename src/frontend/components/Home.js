@@ -6,6 +6,9 @@ import logoMobile from './assets/mobile/logo.png'
 import menuIcon from './assets/mobile/menu.png'
 import homeIcon from './assets/mobile/home.png'
 import HowTo from './ActionHowTo'
+import Nest from './ActionNest'
+import Feed from './ActionFeed'
+import Social from './ActionSocial'
 import Menu from './ActionMenu'
 import Mint from './ActionMint'
 import AboutUs from './ActionAboutUs'
@@ -24,8 +27,8 @@ const Home = ({ farmButton, web3Handler, plantPhase, account, price, supplyLeft,
     return (
         <div className="m-0 p-0 Home">
             {/* LOGO */}
-            {/* <div className="logoDiv d-none d-xl-block"> <Image src={logo} className = "logo" /> </div>
-            <div className="logoDiv d-xl-none"> <Image src={logoMobile} className = "logo" /> </div> */}
+            <div className="logoDiv d-none d-xl-block"> <Image src={logo} className = "logo" /> </div>
+            <div className="logoDiv d-xl-none"> <Image src={logoMobile} className = "logo" /> </div>
 
 
             {/* NAVBAR */}
@@ -51,13 +54,13 @@ const Home = ({ farmButton, web3Handler, plantPhase, account, price, supplyLeft,
                             </div>
                         </Row>
                         <Row className="m-0 p-0">
-                            <div className="actionButton" onClick={farmButton} >
-                                FARM
+                            <div className="actionButton" onClick={() => toggleMenu(4)} >
+                                NEST
                             </div>
                         </Row>
                         <Row className="m-0 p-0">
-                            <div className="actionButton" onClick={() => toggleMenu(2)} >
-                                HOW TO
+                            <div className="actionButton" onClick={() => toggleMenu(5)} >
+                                FEED A BEAN
                             </div>
                         </Row>
                     </Col>
@@ -66,19 +69,18 @@ const Home = ({ farmButton, web3Handler, plantPhase, account, price, supplyLeft,
                     <Col className="pe-5 ps-0 mx-0 my-4 col-3" style={{marginLeft: "", backgroundColor: "rgb(1,1,1,0.0)"}}>
                         <Row className="mx-0 p-0" style={{marginTop: "30vh"}}>
                             <div className="actionButton" onClick={() => buttonLinkOnClick('twitterLink')} >
-                                TWITTER
+                                TALE TOKEN
                                 <a href="https://twitter.com/beanstalkerxyz" target="_blank" id="twitterLink"></a>
                             </div>
                         </Row>
                         <Row className="m-0 p-0">
-                            <div className="actionButton" onClick={() => buttonLinkOnClick('discordLink')} >
-                                DISCORD
-                                <a href="https://discord.gg/taletinker" target="_blank" id="discordLink"></a>
+                            <div className="actionButton" onClick={() => toggleMenu(2)} >
+                                HOW TO
                             </div>
                         </Row>
                         <Row className="m-0 p-0">
-                            <div className="actionButton" onClick={() => buttonLinkOnClick('aboutusLink')} >
-                                ABOUT US
+                            <div className="actionButton" onClick={() => toggleMenu(6)} >
+                                SOCIAL
                                 <a href="https://taletinker.com" target="_blank" id="aboutusLink"></a>
                             </div>
                         </Row>
@@ -95,6 +97,9 @@ const Home = ({ farmButton, web3Handler, plantPhase, account, price, supplyLeft,
                         price={price} plantPhase={plantPhase} farmButton={farmButton} />,
                 '2': <HowTo />,
                 '3': <AboutUs />,
+                '4': <Nest />,
+                '5': <Feed />,
+                '6': <Social />,
                 '10': <Menu toggleMenu={toggleMenu} buttonLinkOnClick={buttonLinkOnClick} farmButton={farmButton} />,
                 }[menu]
             }

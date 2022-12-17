@@ -1,12 +1,12 @@
 @font-face {
   font-family: myFirstFont;
-  src: url("./assets/NerkoOne-Regular.ttf");
+  src: url("./assets/PinkChicken-Regular.ttf");
 }
 
 body {
   height: 100vh;
   font-family: myFirstFont;
-  color: #223c29;
+  color: #393d18;
   text-align: center;
   overflow: hidden;
 }
@@ -90,7 +90,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .logo {
-  width: 60%;
+  width: 40%;
 }
 
 .actionFrame {
