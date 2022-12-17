@@ -133,6 +133,16 @@ a:link, a:visited, a:hover, a:active {
   box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 } */
 
+.pieDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pie {
+  max-width: 45vh;
+  margin-top: 2vh;
+}
+
 .actionButton, .shortButton, .longButton, .mobileMenuButton, .longMobileButton {
   /* Button image dimensions: 309px * 155px */
   background-image: url("./assets/button.png");

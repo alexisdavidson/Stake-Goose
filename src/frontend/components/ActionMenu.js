@@ -17,7 +17,7 @@ const Menu = ({toggleMenu, buttonLinkOnClick, farmButton}) => {
                     <div className="mobileMenuButton" onClick={() => toggleMenu(5)}>FEED A BEAN</div>
                 </Row>
                 <Row className="m-0 p-0">
-                    <div className="mobileMenuButton" onClick={() => buttonLinkOnClick('tokenLink')}>TALE TOKEN</div>
+                    <div className="mobileMenuButton" onClick={() => toggleMenu(7)}>TALE TOKEN</div>
                 </Row>
                 <Row className="m-0 p-0">
                     <div className="mobileMenuButton" onClick={() => toggleMenu(2)}>HOW TO</div>
