@@ -11,7 +11,6 @@ import Feed from './ActionFeed'
 import Social from './ActionSocial'
 import Menu from './ActionMenu'
 import Mint from './ActionMint'
-import AboutUs from './ActionAboutUs'
 
 const fromWei = (num) => ethers.utils.formatEther(num)
 const toWei = (num) => ethers.utils.parseEther(num.toString())
@@ -68,9 +67,9 @@ const Home = ({ farmButton, web3Handler, plantPhase, account, price, supplyLeft,
                     </Col>
                     <Col className="pe-5 ps-0 mx-0 my-4 col-3" style={{marginLeft: "", backgroundColor: "rgb(1,1,1,0.0)"}}>
                         <Row className="mx-0 p-0" style={{marginTop: "30vh"}}>
-                            <div className="actionButton" onClick={() => buttonLinkOnClick('twitterLink')} >
+                            <div className="actionButton" onClick={() => buttonLinkOnClick('tokenLink')} >
                                 TALE TOKEN
-                                <a href="https://twitter.com/beanstalkerxyz" target="_blank" id="twitterLink"></a>
+                                <a href="https://twitter.com/beanstalkerxyz" target="_blank" id="tokenLink"></a>
                             </div>
                         </Row>
                         <Row className="m-0 p-0">
@@ -96,7 +95,6 @@ const Home = ({ farmButton, web3Handler, plantPhase, account, price, supplyLeft,
                         changeQuantity={changeQuantity} mintButton={mintButton} quantity={quantity}
                         price={price} plantPhase={plantPhase} farmButton={farmButton} />,
                 '2': <HowTo />,
-                '3': <AboutUs />,
                 '4': <Nest />,
                 '5': <Feed />,
                 '6': <Social />,

@@ -7,10 +7,10 @@ const HowTo = () => {
     return (
         <Row className="actionFrame">
             <Row className="mx-auto textFrame">
-                <div className="">HOW TO GOOSEBUMPER</div>
+                <div className="actionTitle">HOW TO GOOSEBUMPER</div>
             </Row>
             <Row className="mx-auto mt-0 mb-4 textFrame">
-                <div className="">1. STAKE GOOSE, LAY EGGS BUT BEWARE OF A WOLF 
+                <div className="actionDescription actionDescriptionLeft">1. STAKE GOOSE, LAY EGGS BUT BEWARE OF A WOLF 
                 <br/>2. 1 SILVER EGG = 1 $TALE & 1 GOLD EGG = 3 $TALE 
                 <br/>3. FEED A BEAN TO THE GOOSE & IT LAYS GOLD EGGS 
                 <br/>4. WOLF WILL EAT YOUR GOOSE & EGGS 
@@ -18,9 +18,7 @@ const HowTo = () => {
                 <br/>6. STAKING REWARDS: 
                 <br/>
                 <br/>OPTION A 7 DAYS = 7 EGGS 
-                <br/>
                 <br/>OPTION B 30 DAYS = 35 EGGS 
-                <br/>
                 <br/>OPTION C 60 DAYS = 80 EGGS 
                 <br/>
                 <br/>7. CONVERT 1 $TALE FOR 1 TALEFLY (OPTIONAL 🐺) 

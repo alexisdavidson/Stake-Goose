@@ -75,7 +75,7 @@ body {
 }
 
 a:link, a:visited, a:hover, a:active {
-  color: white;
+  color: #393d18;
   text-decoration: none;
 }
 
@@ -130,6 +130,21 @@ a:link, a:visited, a:hover, a:active {
   align-items: center;
   justify-content: center;
   z-index: 1;
+}
+
+.actionTitle {
+  text-align: center;
+  margin-top: 4vh;
+}
+
+.actionDescription {
+  text-align: center;
+}
+.actionDescriptionLeft {
+  text-align: left;
+  margin-top: 3vh;
+  font-size: 1.3rem;
+  line-height: 1.3rem;
 }
 
 .shortButton {

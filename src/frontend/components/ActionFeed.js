@@ -7,10 +7,10 @@ const Nest = () => {
     return (
         <Row className="actionFrame">
             <Row className="mx-auto textFrame">
-                <div className="">FEED A BEAN</div>
+                <div className="actionTitle">FEED A BEAN</div>
             </Row>
             <Row className="mx-auto mt-0 mb-4 textFrame">
-                <div className="">LIVE IN 07:24:00:00
+                <div className="actionDescription">LIVE IN 07:24:00:00
                 </div>
             </Row>
         </Row>

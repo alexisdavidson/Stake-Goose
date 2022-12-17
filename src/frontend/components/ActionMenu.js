@@ -11,19 +11,19 @@ const Menu = ({toggleMenu, buttonLinkOnClick, farmButton}) => {
                     <div className="mobileMenuButton" onClick={() => buttonLinkOnClick('openseaLink')}>OPENSEA</div>
                 </Row>
                 <Row className="m-0 p-0">
-                    <div className="mobileMenuButton" onClick={farmButton}>FARM</div>
+                    <div className="mobileMenuButton" onClick={() => toggleMenu(4)}>NEST</div>
+                </Row>
+                <Row className="m-0 p-0">
+                    <div className="mobileMenuButton" onClick={() => toggleMenu(5)}>FEED A BEAN</div>
+                </Row>
+                <Row className="m-0 p-0">
+                    <div className="mobileMenuButton" onClick={() => buttonLinkOnClick('tokenLink')}>TALE TOKEN</div>
                 </Row>
                 <Row className="m-0 p-0">
                     <div className="mobileMenuButton" onClick={() => toggleMenu(2)}>HOW TO</div>
                 </Row>
                 <Row className="m-0 p-0">
-                    <div className="mobileMenuButton" onClick={() => buttonLinkOnClick('twitterLink')}>TWITTER</div>
-                </Row>
-                <Row className="m-0 p-0">
-                    <div className="mobileMenuButton" onClick={() => buttonLinkOnClick('discordLink')}>DISCORD</div>
-                </Row>
-                <Row className="m-0 p-0">
-                    <div className="mobileMenuButton" onClick={() => buttonLinkOnClick('aboutusLink')}>ABOUT US</div>
+                    <div className="mobileMenuButton" onClick={() => toggleMenu(6)}>SOCIAL</div>
                 </Row>
             </Row>
         </Row>
