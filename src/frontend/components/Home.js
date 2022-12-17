@@ -49,7 +49,7 @@ const Home = ({ farmButton, web3Handler, plantPhase, account, price, supplyLeft,
                         <Row className="mx-0 p-0" style={{marginTop: "30vh"}}>
                             <div className="actionButton" onClick={() => buttonLinkOnClick('openseaLink')} >
                                 OPENSEA
-                                <a href="https://opensea.io/collection/beanstalker" target="_blank" id="openseaLink"></a>
+                                <a href="https://opensea.io/collection/goosebumper" target="_blank" id="openseaLink"></a>
                             </div>
                         </Row>
                         <Row className="m-0 p-0">
