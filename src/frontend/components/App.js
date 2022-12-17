@@ -188,8 +188,9 @@ function App() {
   }
   
   const iniTimer = () => {
-    // 23th December 8PM GMT +8: 1671796800000 ms
-    let timeleftTemp = 1671796800000 - Date.now()
+    const timestampEnd = 1671883200000
+    // 23th December 8PM GMT +8: 1671883200000 ms
+    let timeleftTemp = timestampEnd - Date.now()
     setCurrentTimestamp(Date.now())
     setTimeleft(timeleftTemp)
     console.log("timeleftTemp: " + timeleftTemp)
@@ -198,7 +199,7 @@ function App() {
     setIntervalVariable(setInterval(() => {
       setCurrentTimestamp(currentTimestampRef.current + 1000)
 
-      setTimeleft(1671796800000 - Date.now())
+      setTimeleft(timestampEnd - Date.now())
     }, 1000))
   }
   useEffect(async () => {

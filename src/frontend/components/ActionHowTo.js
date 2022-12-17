@@ -11,10 +11,10 @@ const HowTo = () => {
                     <div className="actionTitle">HOW TO GOOSEBUMPER</div>
                 </Row>
                 <Row className="mx-auto mt-0 mb-4 textFrame">
-                    <div className="actionDescription actionDescriptionLeft">1. STAKE GOOSE, LAY EGGS BUT BEWARE OF A WOLF 
+                    <div className="actionDescription actionDescriptionLeft">1. STAKE GOOSE, LAY EGGS BUT BEWARE OF THE WOLF 
                     <br/>2. 1 SILVER EGG = 1 $TALE & 1 GOLD EGG = 3 $TALE 
                     <br/>3. FEED A BEAN TO THE GOOSE & IT LAYS GOLD EGGS 
-                    <br/>4. WOLF WILL EAT YOUR GOOSE & EGGS 
+                    <br/>4. THE WOLF WILL EAT YOUR GOOSE & EGGS BUT YOU CAN PREVENT THAT
                     <br/>5. CONVERT TALE TOKEN TO TALEFLY TO FEND OFF THE WOLF 
                     <br/>6. STAKING REWARDS: 
                     <br/>
