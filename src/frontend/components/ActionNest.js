@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { ethers } from "ethers"
 import { Image, Row, Col, Button } from 'react-bootstrap'
+import getTimeLeftString from './TimeOperation'
 
-const Nest = () => {
+const Nest = ({timeleft}) => {
 
     return (
         <Row className="actionFrame">
@@ -10,7 +11,7 @@ const Nest = () => {
                 <div className="actionTitle">STAKE / LAY EGGS</div>
             </Row>
             <Row className="mx-auto mt-0 mb-4 textFrame">
-                <div className="actionDescription">LIVE IN 07:24:00:00
+                <div className="actionDescription">LIVE IN {getTimeLeftString(timeleft)}
                 </div>
             </Row>
         </Row>

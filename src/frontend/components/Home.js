@@ -15,7 +15,7 @@ import Mint from './ActionMint'
 const fromWei = (num) => ethers.utils.formatEther(num)
 const toWei = (num) => ethers.utils.parseEther(num.toString())
 
-const Home = ({ farmButton, web3Handler, plantPhase, account, price, supplyLeft, balance, closeMenu, toggleMenu, menu, changeQuantity, mintButton, quantity }) => {
+const Home = ({ timeleft, farmButton, web3Handler, plantPhase, account, price, supplyLeft, balance, closeMenu, toggleMenu, menu, changeQuantity, mintButton, quantity }) => {
 
     const buttonLinkOnClick = async (elementId) => {
         console.log("buttonLinkOnClick: " + elementId)
@@ -95,8 +95,8 @@ const Home = ({ farmButton, web3Handler, plantPhase, account, price, supplyLeft,
                         changeQuantity={changeQuantity} mintButton={mintButton} quantity={quantity}
                         price={price} plantPhase={plantPhase} farmButton={farmButton} />,
                 '2': <HowTo />,
-                '4': <Nest />,
-                '5': <Feed />,
+                '4': <Nest timeleft={timeleft} />,
+                '5': <Feed timeleft={timeleft} />,
                 '6': <Social />,
                 '10': <Menu toggleMenu={toggleMenu} buttonLinkOnClick={buttonLinkOnClick} farmButton={farmButton} />,
                 }[menu]

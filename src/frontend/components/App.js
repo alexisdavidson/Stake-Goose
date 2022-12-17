@@ -112,15 +112,6 @@ function App() {
     setBalance(await nftRef.current.balanceOf(accounts[0]))
     setAccount(accounts[0])
     loadOpenSeaItems(accounts[0], nftRef.current)
-    await loadPlant(plantingRef.current)
-    plantingRef.current.on("PlantingSuccessful", (user) => {
-        console.log("PlantingSuccessful");
-        console.log(user);
-        console.log(accounts[0]);
-        if (user.toLowerCase() == accounts[0].toLowerCase()) {
-          loadPlant(plantingRef.current)
-        }
-    });
   }
 
   const loadOpenSeaItems = async (acc, nft) => {
@@ -145,95 +136,6 @@ function App() {
       console.log("OpenSea could not find a bean for address " + acc)
   }
 
-  const getTimeLeft = (currentTimestamp, timestampStart, duration) => {
-    const timestampEnd = timestampStart + duration
-    let timestampRelative = timestampEnd - currentTimestamp
-
-    // console.log("timestampStart")
-    // console.log(timestampStart)
-    // console.log("duration")
-    // console.log(duration)
-    // console.log("currentTimestamp")
-    // console.log(currentTimestamp)
-
-    return timestampRelative
-}
-
-  const loadPlant = async (planting) => {
-    console.log("load plant for " + accountRef.current)
-    console.log("planting.address: " + planting.address)
-    const plantObjectTemp = await planting.getPlant(accountRef.current)
-    console.log("plantObjectTemp: " + plantObjectTemp)
-    setPlantObject(plantObjectTemp)
-    const phaseDurationTemp = parseInt(await planting.phaseDuration(plantObjectTemp.phase))
-
-    await updateCurrentTimestampFromBlockchain()
-    let timeleftTemp = getTimeLeft(currentTimestampRef.current, parseInt(plantObjectTemp[1]), phaseDurationTemp)
-    setTimeleft(timeleftTemp)
-    console.log("timeleftTemp: " + timeleftTemp)
-
-    setPlantImage(plantObjectTemp, phaseDurationTemp)
-    console.log("phase: " + plantObjectTemp.phase + ", duration: " + phaseDurationTemp + ", start: " + parseInt(plantObjectTemp[1]))
-    
-
-    clearInterval(intervalRef.current)
-    console.log("Set interval")
-    setIntervalVariable(setInterval(() => {
-      setCurrentTimestamp(currentTimestampRef.current + 1)
-      // console.log("currentTimestamp: " + currentTimestampRef.current)
-
-      let timeleftTemp = getTimeLeft(currentTimestampRef.current, parseInt(plantObjectTemp[1]), phaseDurationTemp)
-      setTimeleft(timeleftTemp)
-      let cooldownDone = timeleftTemp <= 0
-      let justFinishedCooldown = cooldownDone && timeleftLastTick > 0
-      // console.log("timeleftTemp: " + timeleftTemp)
-      // console.log("timeleftLastTick: " + timeleftLastTick)
-
-      if (justFinishedCooldown) {
-          loadPlant(planting)
-      }
-      timeleftLastTick = timeleftTemp
-      
-    }, 1000))
-}
-
-const setPlantImage = (plantObjectTemp) => {
-    let cooldownDone = timeleftRef.current <= 0
-
-    let plantSet = 0
-
-    if(plantObjectTemp.phase == 0) {
-      plantSet = (0)
-    }
-    else if(plantObjectTemp.phase == 1) {
-        plantSet = (1)
-        if (cooldownDone) {
-          plantSet = (2)
-        }
-    }
-    else if(plantObjectTemp.phase == 2) {
-        plantSet = (2)
-        if (cooldownDone) {
-          plantSet = (3)
-        }
-    }
-    else if(plantObjectTemp.phase == 3) {
-        plantSet = (3)
-        if (cooldownDone) {
-          plantSet = (4)
-        }
-    }
-    else if(plantObjectTemp.phase == 4) {
-        plantSet = (4)
-        if (cooldownDone) {
-          plantSet = (5)
-        }
-    }
-
-    console.log("setPlantImage, cooldownDone: " + cooldownDone + ", plantSet: " + plantSet)
-
-    setPlant(plantSet)
-}
 
   const mintFinished = async (nft) => {
       console.log("mintFinished: " + quantityRef.current)
@@ -285,30 +187,36 @@ const setPlantImage = (plantObjectTemp) => {
     console.log("planting address: " + planting.address)
   }
   
+  const iniTimer = () => {
+    // 23th December 8PM GMT +8: 1671796800000 ms
+    let timeleftTemp = 1671796800000 - Date.now()
+    setCurrentTimestamp(Date.now())
+    setTimeleft(timeleftTemp)
+    console.log("timeleftTemp: " + timeleftTemp)
+    console.log("Date.now(): " + Date.now())
+    console.log("Set interval")
+    setIntervalVariable(setInterval(() => {
+      setCurrentTimestamp(currentTimestampRef.current + 1000)
 
+      setTimeleft(1671796800000 - Date.now())
+    }, 1000))
+  }
   useEffect(async () => {
+    iniTimer()
     return () => {
       clearInterval(intervalRef.current);
-      nft?.removeAllListeners("MintSuccessful");
+      // nft?.removeAllListeners("MintSuccessful");
     };
   }, [])
 
   return (
     <BrowserRouter>
       <div className="App" id="wrapper">
-          {!menuFarm ? (
-              <Home web3Handler={web3Handler} account={account} planting={planting} 
-                supplyLeft={supplyLeft} balance={balance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu} price={price}
-                changeQuantity={changeQuantity} mintButton={mintButton} quantity={quantity} plantPhase={plant}
-                farmButton={farmButton} >
-              </Home>
-          ) : (
-            <Farm plant={plant} plantObject={plantObject} timeleft={timeleft}
-              currentTimestamp={currentTimestamp} web3Handler={web3Handler} account={account} nft={nft} planting={planting}
-              balance={balance} closeMenu={closeMenu}
-              beanToUse={beanToUse} castleEnabled={true} castle={castle} castleLooted={castleLooted} >
-            </Farm>
-          )}
+        <Home web3Handler={web3Handler} account={account} planting={planting} 
+          supplyLeft={supplyLeft} balance={balance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu} price={price}
+          changeQuantity={changeQuantity} mintButton={mintButton} quantity={quantity} plantPhase={plant}
+          farmButton={farmButton} timeleft={timeleft}>
+        </Home>
       </div>
     </BrowserRouter>
   );
