@@ -17,7 +17,7 @@ const fromWei = (num) => ethers.utils.formatEther(num)
 const toWei = (num) => ethers.utils.parseEther(num.toString())
 
 const Home = ({ account, beanBalance, closeMenu, toggleMenu, menu, beanToUse, timeleft, nftStaker, items, currentItemIndex, 
-    tokenAllowance, tokenEgg, gooseNft, setTokenAllowance}) => {
+    tokenAllowance, tokenEgg, gooseNft, setTokenAllowance, beanNft}) => {
 
     const buttonLinkOnClick = async (elementId) => {
         console.log("buttonLinkOnClick: " + elementId)
@@ -97,7 +97,7 @@ const Home = ({ account, beanBalance, closeMenu, toggleMenu, menu, beanToUse, ti
                     tokenAllowance={tokenAllowance} tokenEgg={tokenEgg} gooseNft={gooseNft} setTokenAllowance={setTokenAllowance} 
                     account={account} />,
                 '5': <Feed timeleft={timeleft} beanBalance={beanBalance} nftStaker={nftStaker} 
-                    items={items} currentItemIndex={currentItemIndex} beanToUse={beanToUse} />,
+                    items={items} currentItemIndex={currentItemIndex} beanToUse={beanToUse} beanNft={beanNft}/>,
                 '6': <Social />,
                 '7': <TaleToken buttonLinkOnClick={buttonLinkOnClick} />,
                 '10': <Menu toggleMenu={toggleMenu} buttonLinkOnClick={buttonLinkOnClick} />,
