@@ -15,6 +15,8 @@ import NFT_GooseAbi from '../contractsData/NFT_Goose.json'
 import NFT_GooseAddress from '../contractsData/NFT_Goose-address.json'
 import NFTStakerAbi from '../contractsData/NFTStaker.json'
 import NFTStakerAddress from '../contractsData/NFTStaker-address.json'
+import Token_EggAbi from '../contractsData/Token_Egg.json'
+import Token_EggAddress from '../contractsData/Token_Egg-address.json'
 import configContract from "./configContract.json";
 
 const fromWei = (num) => ethers.utils.formatEther(num)
@@ -26,6 +28,7 @@ function App() {
   const [beanNft, setBeanNft] = useState({})
   const [gooseNft, setGooseNft] = useState({})
   const [nftStaker, setNftStaker] = useState({})
+  const [tokenEgg, setTokenEgg] = useState({})
 
   const [menu, setMenu] = useState(0)
   const [currentTimestamp, setCurrentTimestamp] = useState(0)
@@ -33,6 +36,9 @@ function App() {
   const [provider, setProvider] = useState({})
   const [intervalVariable, setIntervalVariable] = useState(null)
   const [beanToUse, setBeanToUse] = useState(0)
+  const [tokenAllowance, setTokenAllowance] = useState(0)
+  const [items, setItems] = useState([])
+  const [currentItemIndex, setCurrentItemIndex] = useState(0)
 
   const providerRef = useRef();
   providerRef.current = provider;
@@ -42,6 +48,8 @@ function App() {
   gooseNftRef.current = gooseNft;
   const nftStakerRef = useRef();
   nftStakerRef.current = nftStaker;
+  const tokenEggRef = useRef();
+  tokenEggRef.current = tokenEgg;
   const accountRef = useRef();
   accountRef.current = account;
   const currentTimestampRef = useRef();
@@ -71,12 +79,15 @@ function App() {
     await loadContracts(accounts[0])
     
     setBeanBalance(parseInt(await beanNftRef.current.balanceOf(accounts[0])))
+    setTokenAllowance(parseInt(await tokenEggRef.current.allowance(accounts[0], nftStakerRef.current.address)))
     setAccount(accounts[0])
-    loadOpenSeaItems(accounts[0], beanNftRef.current)
+    await loadOpenSeaBeanToUse(accounts[0], beanNftRef.current)
+    await new Promise(r => setTimeout(r, 1000));
+    await loadOpenSeaNftGooses(accounts[0], gooseNftRef.current)
   }
 
-  const loadOpenSeaItems = async (acc, nft) => {
-    let items = await fetch(`${configContract.OPENSEA_API}/assets?owner=${acc}&asset_contract_address=${nft.address}&format=json`)
+  const loadOpenSeaBeanToUse = async (acc, nft) => {
+    let items = await fetch(`${configContract.OPENSEA_API_TESTNETS}/assets?owner=${acc}&asset_contract_address=${nft.address}&format=json`)
     .then((res) => res.json())
     .then((res) => {
       return res.assets
@@ -95,6 +106,22 @@ function App() {
     }
     else 
       console.log("OpenSea could not find a bean for address " + acc)
+  }
+
+  const loadOpenSeaNftGooses = async (acc, nft) => {
+    let items = await fetch(`${configContract.OPENSEA_API_TESTNETS}/assets?owner=${acc}&asset_contract_address=${nft.address}&format=json`)
+    .then((res) => res.json())
+    .then((res) => {
+      return res.assets
+    })
+    .catch((e) => {
+      console.error(e)
+      console.error('Could not talk to OpenSea')
+      return null
+    })
+
+    console.log(items)
+    setItems(items)
   }
 
   const updateCurrentTimestampFromBlockchain = async () => {
@@ -123,11 +150,11 @@ function App() {
     const beanNft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer)
     const gooseNft = new ethers.Contract(NFT_GooseAddress.address, NFT_GooseAbi.abi, signer)
     const nftStaker = new ethers.Contract(NFTStakerAddress.address, NFTStakerAbi.abi, signer)
+    const tokenEgg = new ethers.Contract(Token_EggAddress.address, Token_EggAbi.abi, signer)
     setBeanNft(beanNft)
     setGooseNft(gooseNft)
     setNftStaker(nftStaker)
-
-    loadItems()
+    setTokenEgg(tokenEgg)
 
     nftStaker.on("FeedSuccessful", (user, tokenId) => {
         if (user.toLowerCase() == acc.toLowerCase()) {
@@ -151,6 +178,8 @@ function App() {
     console.log("beanNft", beanNft.address)
     console.log("gooseNft", gooseNft.address)
     console.log("nftStaker", nftStaker.address)
+
+    loadItems()
   }
   
   const iniTimer = () => {
@@ -184,12 +213,16 @@ function App() {
         <Routes>
           <Route path="/" element={
             <Home beanBalance={beanBalance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu}
-              beanToUse={beanToUse} timeleft={timeleft} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} >
+              beanToUse={beanToUse} timeleft={timeleft} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} 
+              items={items} currentItemIndex={currentItemIndex} tokenAllowance={tokenAllowance} 
+              tokenEgg={tokenEgg} setTokenAllowance={setTokenAllowance} account={account} >
             </Home>
           } />
           <Route path="/tester" element={
             <Home beanBalance={beanBalance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu}
-              beanToUse={beanToUse} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} >
+              beanToUse={beanToUse} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} 
+              items={items} currentItemIndex={currentItemIndex} tokenAllowance={tokenAllowance} 
+              tokenEgg={tokenEgg} setTokenAllowance={setTokenAllowance} account={account} >
             </Home>
           } />
         </Routes>

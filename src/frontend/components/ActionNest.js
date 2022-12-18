@@ -4,17 +4,24 @@ import { Image, Row, Col, Button } from 'react-bootstrap'
 import getTimeLeftString from './TimeOperation'
 import goose from './assets/Goose.png'
 
-const Nest = ({timeleft, nftStaker, items, currentItemIndex}) => {
+const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentItemIndex, tokenAllowance, setTokenAllowance}) => {
     const [duration, setDuration] = useState(0)
     
     const stakeGoose = async(useTalefly) => {
         console.log("StakeGoose button", currentItemIndex, useTalefly, duration)
-        await nftStaker.stake(items[currentItemIndex].tokenId, duration, useTalefly);
+        if (useTalefly) {
+            if (tokenAllowance < 25) {
+                await tokenEgg.approve(nftStaker.address, 1000);
+                setTokenAllowance(parseInt(await tokenEgg.allowance(account, nftStaker.address)))
+            }
+        }
+        await gooseNft.approve(nftStaker.address, items[currentItemIndex].token_id);
+        await nftStaker.stake(items[currentItemIndex].token_id, duration, useTalefly);
     }
     
     const unstakeGoose = async() => {
         console.log("unstakeGoose button", currentItemIndex)
-        await nftStaker.unstake(items[currentItemIndex].tokenId);
+        await nftStaker.unstake(items[currentItemIndex].token_id);
     }
     
     const selectDuration = (id) => {

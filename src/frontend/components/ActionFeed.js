@@ -7,7 +7,7 @@ import goose from './assets/Goose.png'
 const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex}) => {
     const feedGoose = async() => {
         console.log("Feed Goose button", currentItemIndex)
-        await nftStaker.feedGoose(items[currentItemIndex].tokenId);
+        await nftStaker.feedGoose(items[currentItemIndex].token_id);
     }
 
     return (
