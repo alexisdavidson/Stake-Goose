@@ -319,10 +319,14 @@ a:link, a:visited, a:hover, a:active {
 
   .menuMobileImage {
     width: 30%;
+    margin: 0;
+    padding: 0;
   }
   .homeMobileImage {
     width: 25%;
     z-index: 50;
+    margin: 0;
+    padding: 0;
   }
   
 
