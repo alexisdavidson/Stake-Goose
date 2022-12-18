@@ -116,6 +116,29 @@ a:link, a:visited, a:hover, a:active {
   margin-top: 2vh;
 }
 
+.gooseImg {
+  max-width: 25vh;
+  margin-top: 4vh;
+}
+
+.gooseDiv {
+  text-align: center;
+}
+.gooseDescription {
+  /* text-align: left; */
+  margin-top: 2vh;
+  margin-bottom: 0vh;
+}
+.gooseDescriptionFeedButton {
+  text-align: center;
+  margin-bottom: 4vh;
+}
+
+.gooseDescriptionFeedButtonSmall {
+  margin-top: 3vh;
+  font-size: 1.5rem;
+}
+
 .actionButton, .shortButton, .longButton, .mobileMenuButton, .longMobileButton {
   /* Button image dimensions: 309px * 155px */
   background-image: url("./assets/button.png");
@@ -244,6 +267,20 @@ a:link, a:visited, a:hover, a:active {
 
 @media only screen and (max-width: 1199.98px){
   
+.gooseDescriptionFeedButton {
+  margin-bottom: 0vh;
+}
+.gooseDescription {
+  margin-top: 0vh;
+}
+
+.gooseDescriptionFeedButtonSmall {
+  margin-top: 1vh;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .actionTitle {
   margin-left: 0;
   padding-left: 0;

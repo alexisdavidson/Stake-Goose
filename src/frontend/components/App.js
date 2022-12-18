@@ -149,7 +149,7 @@ function App() {
           <Route path="/tester" element={
             <Home web3Handler={web3Handler} account={account} 
               beanBalance={beanBalance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu}
-              beanToUse={beanToUse} timeleft={timeleft}>
+              beanToUse={beanToUse} >
             </Home>
           } />
         </Routes>
