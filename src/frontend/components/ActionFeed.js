@@ -10,6 +10,12 @@ const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex}) => {
         await nftStaker.feedGoose(items[currentItemIndex].token_id);
     }
 
+    const itemsNullOrEmptyText = () => {
+        if (items == null)
+            return "Loading..."
+        return "You don't have a Goose!"
+    }
+
     return (
         <Row className="actionFrame">
             <Row className="mx-auto textFrame">
@@ -19,7 +25,7 @@ const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex}) => {
                 {!timeleft ? (
                     <>
                         {items == null || items.length == 0 ? (
-                            <div className="actionTitle">You don't have a Goose!</div>
+                            <div className="actionTitle">{itemsNullOrEmptyText()}</div>
                         ) : (
                             <>
                                 <Col className="m-auto gooseDiv col-12 col-lg-6">

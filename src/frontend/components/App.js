@@ -37,7 +37,7 @@ function App() {
   const [intervalVariable, setIntervalVariable] = useState(null)
   const [beanToUse, setBeanToUse] = useState(0)
   const [tokenAllowance, setTokenAllowance] = useState(0)
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState(null)
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
 
   const providerRef = useRef();
@@ -75,15 +75,12 @@ function App() {
 
   const web3Handler = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    setAccount(accounts[0])
 
     await loadContracts(accounts[0])
-    
+
     setBeanBalance(parseInt(await beanNftRef.current.balanceOf(accounts[0])))
     setTokenAllowance(parseInt(await tokenEggRef.current.allowance(accounts[0], nftStakerRef.current.address)))
-    setAccount(accounts[0])
-    await loadOpenSeaBeanToUse(accounts[0], beanNftRef.current)
-    await new Promise(r => setTimeout(r, 1000));
-    await loadOpenSeaNftGooses(accounts[0], gooseNftRef.current)
   }
 
   const loadOpenSeaBeanToUse = async (acc, nft) => {
@@ -121,7 +118,7 @@ function App() {
     })
 
     console.log(items)
-    setItems(items)
+    return items
   }
 
   const updateCurrentTimestampFromBlockchain = async () => {
@@ -137,8 +134,39 @@ function App() {
     console.log("loadItems")
     updateCurrentTimestampFromBlockchain()
 
-    // Call openSea list
-    // Call nftStakerRef list
+    await loadOpenSeaBeanToUse(accountRef.current, beanNftRef.current)
+    await new Promise(r => setTimeout(r, 1000));
+
+    let items = await loadOpenSeaNftGooses(accountRef.current, gooseNftRef.current)
+
+    for(let i = 0; i < items.length; i ++) {
+      items[i].isStaked = false
+      items[i].isFed = accountRef.current.toLowerCase() == (await nftStakerRef.current.tokenFed(items[i].token_id)).toLowerCase()
+      items[i].eggType = items[i].isFed ? "Gold" : "Silver"
+    }
+
+    let itemsStaked = []
+    let itemsStakedTokenIds = await nftStakerRef.current.getStakedTokens(accountRef.current)
+    if (itemsStakedTokenIds.length > 0) {
+      let itemsStakedTimestampStarts = await nftStakerRef.current.getStakedTimestamps(accountRef.current)
+      let itemsStakedDurations = await nftStakerRef.current.getStakedDurations(accountRef.current)
+      let itemsStakedTaleflyUseds = await nftStakerRef.current.getStakedTaleflyUsed(accountRef.current)
+
+      for(let i = 0; i < itemsStaked.length; i++) {
+        itemsStaked[i].isStaked = true
+        itemsStaked[i].token_id = parseInt(itemsStakedTokenIds[i])
+        itemsStaked[i].isFed = accountRef.current.toLowerCase()
+          == (await nftStakerRef.current.tokenFed(itemsStaked[i].token_id)).toLowerCase()
+        itemsStaked[i].eggType = itemsStaked[i].isFed ? "Gold" : "Silver"
+      }
+    }
+
+    // Optional Optimization: Remove all elements from the OpenSea list that are in the itemsStaked list
+    
+    items = [...items, ...itemsStaked]
+
+    console.log(items)
+    setItems(items)
   }
 
   const loadContracts = async (acc) => {

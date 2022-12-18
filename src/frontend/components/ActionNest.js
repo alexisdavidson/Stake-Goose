@@ -39,6 +39,12 @@ const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentI
         selectedElement.classList.add("durationselect");
     }
 
+    const itemsNullOrEmptyText = () => {
+        if (items == null)
+            return "Loading..."
+        return "You don't have a Goose!"
+    }
+
     return (
         <Row className="actionFrame">
             <Row className="mx-auto textFrame">
@@ -48,7 +54,7 @@ const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentI
                 {!timeleft ? (
                     <>
                         {items == null || items.length == 0 ? (
-                            <div className="actionTitle">You don't have a Goose!</div>
+                            <div className="actionTitle">{itemsNullOrEmptyText()}</div>
                         ) : (
                             <>
                                 <Col className="m-auto gooseDiv col-12 col-lg-6">
