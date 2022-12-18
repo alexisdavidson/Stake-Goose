@@ -4,10 +4,12 @@ import { Image, Row, Col, Button } from 'react-bootstrap'
 import getTimeLeftString from './TimeOperation'
 import goose from './assets/Goose.png'
 
-const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex}) => {
+const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex, beanToUse}) => {
     const feedGoose = async() => {
         console.log("Feed Goose button", currentItemIndex)
-        await nftStaker.feedGoose(items[currentItemIndex].token_id);
+        
+        await nft.approve(nftStaker.address, beanToUse);
+        await nftStaker.feedGoose(items[currentItemIndex].token_id, beanToUse);
     }
 
     const itemsNullOrEmptyText = () => {

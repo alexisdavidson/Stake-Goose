@@ -10,6 +10,7 @@ import "hardhat/console.sol";
 
 contract NFTStaker is ERC721Holder, ReentrancyGuard, Ownable {
     ERC721A public parentNFT;
+    ERC721A public beanNFT;
     ERC20 public taleToken;
     address public wolfAddress;
 
@@ -48,8 +49,9 @@ contract NFTStaker is ERC721Holder, ReentrancyGuard, Ownable {
         uint256 tokenId
     );
 
-    constructor(address _nftAddress, address _wolfAddress) {
+    constructor(address _nftAddress, address _beanAddress, address _wolfAddress) {
         parentNFT = ERC721A(_nftAddress);
+        beanNFT = ERC721A(_beanAddress);
         wolfAddress = _wolfAddress;
 
         durations[0] = Duration(7, 5, 7); // 7 Days, 5 Talefly, 7 Eggs
@@ -170,8 +172,11 @@ contract NFTStaker is ERC721Holder, ReentrancyGuard, Ownable {
         taleToken.transfer(msg.sender, taleToken.balanceOf(address(this)));
     }
 
-    function feedGoose(uint256 _tokenId) public {
+    function feedGoose(uint256 _tokenId, uint256 _beanTokenId) public {
         require(parentNFT.ownerOf(_tokenId) == msg.sender, "You do not own this NFT.");
+        require(beanNFT.ownerOf(_beanTokenId) == msg.sender, "You do not own this Bean.");
+        
+        beanNFT.safeTransferFrom(msg.sender, 0x000000000000000000000000000000000000dEaD, _beanTokenId);
         tokenFed[_tokenId] = msg.sender;
 
         emit FeedSuccessful(msg.sender, _tokenId);

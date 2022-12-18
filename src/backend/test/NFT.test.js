@@ -36,7 +36,7 @@ describe("NFT & Planting", async function() {
         castle.setTokenAddress(tokenEgg.address);
         
         wolfAddress = addr4.address
-        nftStaker = await NFTStaker.deploy(nftGoose.address, wolfAddress);
+        nftStaker = await NFTStaker.deploy(nftGoose.address, nft.address, wolfAddress);
         await nftStaker.setTokenAddress(tokenEgg.address);
         
         await tokenEgg.connect(deployer).transfer(nftStaker.address, stakerTokenBalance);
@@ -154,10 +154,19 @@ describe("NFT & Planting", async function() {
         })
         it("Should feed goose and triple reward", async function() {
             await nftGoose.connect(deployer).setMintEnabled(true);
-            await nftGoose.connect(addr1).mint(1);
+            await nft.connect(deployer).setMintEnabled(true);
+            await nft.connect(deployer).setPrice(0);
 
-            await expect(nftStaker.connect(addr2).feedGoose(1)).to.be.revertedWith("You do not own this NFT.");
-            await nftStaker.connect(addr1).feedGoose(1);
+            await nftGoose.connect(addr1).mint(1);
+            await nft.connect(addr2).mint(1);
+            await nft.connect(addr1).mint(1);
+
+            await expect(nftStaker.connect(addr2).feedGoose(1, 1)).to.be.revertedWith("You do not own this NFT.");
+            await expect(nftStaker.connect(addr1).feedGoose(1, 1)).to.be.revertedWith("You do not own this Bean.");
+            await nft.connect(addr1).approve(nftStaker.address, 2);
+            expect(await nft.totalSupply()).to.equal(2);
+            await nftStaker.connect(addr1).feedGoose(1, 2);
+            // expect(await nft.totalSupply()).to.equal(1); // Sending to dead address dont reduce total supply. But Opensea does track it?
             expect(await nftStaker.tokenFed(1)).to.equal(addr1.address);
 
             await tokenEgg.connect(addr1).approve(nftStaker.address, 1000);
