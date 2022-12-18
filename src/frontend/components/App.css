@@ -139,7 +139,7 @@ a:link, a:visited, a:hover, a:active {
   font-size: 1.5rem;
 }
 
-.actionButton, .shortButton, .longButton, .mobileMenuButton, .longMobileButton {
+.actionButton, .actionButtonNest, .shortButton, .longButton, .mobileMenuButton, .longMobileButton {
   /* Button image dimensions: 309px * 155px */
   background-image: url("./assets/button.png");
   background-size: 100% 100%;
@@ -155,6 +155,8 @@ a:link, a:visited, a:hover, a:active {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  line-height: 1.5rem;
   z-index: 1;
 }
 
@@ -173,7 +175,7 @@ a:link, a:visited, a:hover, a:active {
   line-height: 1.3rem;
 }
 
-.actionButton:hover, .shortButton:hover {
+.actionButton:hover, .shortButton:hover, .actionButtonNest:hover {
   cursor: pointer;
 }
 
@@ -256,22 +258,61 @@ a:link, a:visited, a:hover, a:active {
   margin-bottom: 4vh;
 }
 
+.gooseNestSelectDays {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2vh;
+}
+
+.gooseNestSelectDaysElement {
+  min-width: 2.5rem;
+}
+
+.durationselect {
+  background-color: #eddf3e;
+  border-radius: 2px;
+  border-color: #080807;
+}
+
+.durationunselect {
+  background-color: transparent;
+}
 
 
-
-
-
+.durationselect:hover, .durationunselect:hover {
+  cursor: pointer;
+}
+.gooseNestSelectDaysSeparator:hover {
+  cursor: default;
+}
 
 
 
 
 @media only screen and (max-width: 1199.98px){
   
+.gooseNestSelectDays {
+  margin-bottom: 1vh;
+}
+
+.actionButtonNest {
+  width: 8rem;
+  height: 4rem;
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+}
+.gooseImg {
+  max-width: 15vh;
+  margin-top: 2vh;
+}
 .gooseDescriptionFeedButton {
-  margin-bottom: 0vh;
 }
 .gooseDescription {
   margin-top: 0vh;
+  line-height: 1.2rem;
+  margin-top: 1vh;
 }
 
 .gooseDescriptionFeedButtonSmall {
