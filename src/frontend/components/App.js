@@ -131,6 +131,7 @@ function App() {
   }
 
   const loadItems = async() => {
+    setItems(null)
     console.log("loadItems")
     updateCurrentTimestampFromBlockchain()
 
