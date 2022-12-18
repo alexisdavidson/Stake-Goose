@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ethers } from "ethers"
 import { Image, Row, Col, Button } from 'react-bootstrap'
 
-const Menu = ({toggleMenu, buttonLinkOnClick, farmButton}) => {
+const Menu = ({toggleMenu, buttonLinkOnClick}) => {
 
     return (
         <Row className="actionFrame">

@@ -16,7 +16,7 @@ import TaleToken from './ActionToken'
 const fromWei = (num) => ethers.utils.formatEther(num)
 const toWei = (num) => ethers.utils.parseEther(num.toString())
 
-const Home = ({ timeleft, farmButton, web3Handler, plantPhase, account, price, supplyLeft, balance, closeMenu, toggleMenu, menu, changeQuantity, mintButton, quantity }) => {
+const Home = ({ web3Handler, account, beanBalance, closeMenu, toggleMenu, menu, beanToUse, timeleft }) => {
 
     const buttonLinkOnClick = async (elementId) => {
         console.log("buttonLinkOnClick: " + elementId)
@@ -91,15 +91,12 @@ const Home = ({ timeleft, farmButton, web3Handler, plantPhase, account, price, s
             {
                 {
                 '0': <></>,
-                '1': <Mint web3Handler={web3Handler} account={account} supplyLeft={supplyLeft} balance={balance} 
-                        changeQuantity={changeQuantity} mintButton={mintButton} quantity={quantity}
-                        price={price} plantPhase={plantPhase} farmButton={farmButton} />,
                 '2': <HowTo />,
                 '4': <Nest timeleft={timeleft} />,
                 '5': <Feed timeleft={timeleft} />,
                 '6': <Social />,
                 '7': <TaleToken buttonLinkOnClick={buttonLinkOnClick} />,
-                '10': <Menu toggleMenu={toggleMenu} buttonLinkOnClick={buttonLinkOnClick} farmButton={farmButton} />,
+                '10': <Menu toggleMenu={toggleMenu} buttonLinkOnClick={buttonLinkOnClick} />,
                 }[menu]
             }
         </div>
