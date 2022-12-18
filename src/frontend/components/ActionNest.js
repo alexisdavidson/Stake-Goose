@@ -11,8 +11,13 @@ const Nest = ({timeleft}) => {
                 <div className="actionTitle">STAKE / LAY EGGS</div>
             </Row>
             <Row className="mx-auto mt-0 mb-4 textFrame">
-                <div className="actionDescription actionDescriptionBig">LIVE IN {getTimeLeftString(timeleft)}
-                </div>
+                {!timeleft ? (
+                    <div className="actionDescription actionDescriptionBig">Go.
+                    </div>
+                ) : (
+                    <div className="actionDescription actionDescriptionBig">LIVE IN {getTimeLeftString(timeleft)}
+                    </div>
+                )}
             </Row>
         </Row>
     );

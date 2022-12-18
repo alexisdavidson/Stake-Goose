@@ -213,11 +213,22 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App" id="wrapper">
-        <Home web3Handler={web3Handler} account={account} planting={planting} 
-          supplyLeft={supplyLeft} balance={balance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu} price={price}
-          changeQuantity={changeQuantity} mintButton={mintButton} quantity={quantity} plantPhase={plant}
-          farmButton={farmButton} timeleft={timeleft}>
-        </Home>
+        <Routes>
+          <Route path="/" element={
+            <Home web3Handler={web3Handler} account={account} planting={planting} 
+              supplyLeft={supplyLeft} balance={balance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu} price={price}
+              changeQuantity={changeQuantity} mintButton={mintButton} quantity={quantity} plantPhase={plant}
+              farmButton={farmButton} timeleft={timeleft}>
+            </Home>
+          } />
+          <Route path="/tester" element={
+            <Home web3Handler={web3Handler} account={account} planting={planting} 
+              supplyLeft={supplyLeft} balance={balance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu} price={price}
+              changeQuantity={changeQuantity} mintButton={mintButton} quantity={quantity} plantPhase={plant}
+              farmButton={farmButton}>
+            </Home>
+          } />
+        </Routes>
       </div>
     </BrowserRouter>
   );
