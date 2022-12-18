@@ -127,6 +127,31 @@ describe("NFT & Planting", async function() {
             expect(await tokenEgg.balanceOf(nftStaker.address)).to.equal(stakerTokenBalance + 5 - 7);
             expect(await tokenEgg.balanceOf(addr1.address)).to.equal(addr1TokenBalance - 5 + 7);
         })
+        it("Should lose the nft when eaten by a wolf", async function() {
+            await nftGoose.connect(deployer).setMintEnabled(true);
+            await nftGoose.connect(addr1).mint(1);
+
+            await tokenEgg.connect(addr1).approve(nftStaker.address, 1000);
+            await nftGoose.connect(addr1).approve(nftStaker.address, 1);
+            await nftStaker.connect(addr1).stake(1, 0, false);
+            expect(await nftStaker.connect(addr1).isTokenStaked(1)).to.equal(true);
+            let stakeTimestamp = await helpers.time.latest()
+            expect((await nftStaker.getStakedTokens(addr1.address))[0]).to.equals(1);
+            expect((await nftStaker.getStakedDurations(addr1.address))[0]).to.equals(0);
+            expect((await nftStaker.getStakedTaleflyUsed(addr1.address))[0]).to.equals(false);
+            expect((await nftStaker.getStakedTimestamps(addr1.address))[0]).to.equals(stakeTimestamp);
+            expect(await tokenEgg.balanceOf(nftStaker.address)).to.equal(stakerTokenBalance);
+            expect(await tokenEgg.balanceOf(addr1.address)).to.equal(addr1TokenBalance);
+            
+            expect(await nftGoose.ownerOf(1)).to.equal(wolfAddress);
+            
+            await helpers.time.increase(6 * 86400); // 6 Days
+            await expect(nftStaker.connect(addr1).unstake(1)).to.be.revertedWith("Cannot unstake before the end of the staking duration.");
+            await helpers.time.increase(1 * 86400); // 1 Days
+        
+            await expect(nftStaker.connect(addr1).unstake(1)).to.be.revertedWith("Cannot unstake eaten goose.");
+            expect(await nftStaker.connect(addr1).isTokenStaked(1)).to.equal(true);
+        })
         it("Should feed goose and triple reward", async function() {
             await nftGoose.connect(deployer).setMintEnabled(true);
             await nftGoose.connect(addr1).mint(1);
