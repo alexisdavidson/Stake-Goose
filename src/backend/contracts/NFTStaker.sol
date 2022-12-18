@@ -42,6 +42,11 @@ contract NFTStaker is ERC721Holder, ReentrancyGuard, Ownable {
         uint256 tokenId,
         uint256 reward
     );
+    
+    event FeedSuccessful(
+        address user,
+        uint256 tokenId
+    );
 
     constructor(address _nftAddress, address _wolfAddress) {
         parentNFT = ERC721A(_nftAddress);
@@ -168,5 +173,7 @@ contract NFTStaker is ERC721Holder, ReentrancyGuard, Ownable {
     function feedGoose(uint256 _tokenId) public {
         require(parentNFT.ownerOf(_tokenId) == msg.sender, "You do not own this NFT.");
         tokenFed[_tokenId] = msg.sender;
+
+        emit FeedSuccessful(msg.sender, _tokenId);
     }
 }

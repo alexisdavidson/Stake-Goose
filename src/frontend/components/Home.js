@@ -16,7 +16,7 @@ import TaleToken from './ActionToken'
 const fromWei = (num) => ethers.utils.formatEther(num)
 const toWei = (num) => ethers.utils.parseEther(num.toString())
 
-const Home = ({ web3Handler, account, beanBalance, closeMenu, toggleMenu, menu, beanToUse, timeleft }) => {
+const Home = ({ beanBalance, closeMenu, toggleMenu, menu, beanToUse, timeleft, nftStaker }) => {
 
     const buttonLinkOnClick = async (elementId) => {
         console.log("buttonLinkOnClick: " + elementId)
@@ -54,12 +54,12 @@ const Home = ({ web3Handler, account, beanBalance, closeMenu, toggleMenu, menu, 
                             </div>
                         </Row>
                         <Row className="m-0 p-0">
-                            <div className="actionButton" onClick={() => toggleMenu(4)} >
+                            <div className="actionButton" onClick={() => toggleMenu(4, timeleft == null)} >
                                 NEST
                             </div>
                         </Row>
                         <Row className="m-0 p-0">
-                            <div className="actionButton" onClick={() => toggleMenu(5)} >
+                            <div className="actionButton" onClick={() => toggleMenu(5, timeleft == null)} >
                                 FEED A BEAN
                             </div>
                         </Row>
@@ -92,8 +92,8 @@ const Home = ({ web3Handler, account, beanBalance, closeMenu, toggleMenu, menu, 
                 {
                 '0': <></>,
                 '2': <HowTo />,
-                '4': <Nest timeleft={timeleft} />,
-                '5': <Feed timeleft={timeleft} />,
+                '4': <Nest timeleft={timeleft} nftStaker={nftStaker} />,
+                '5': <Feed timeleft={timeleft} beanBalance={beanBalance} nftStaker={nftStaker} />,
                 '6': <Social />,
                 '7': <TaleToken buttonLinkOnClick={buttonLinkOnClick} />,
                 '10': <Menu toggleMenu={toggleMenu} buttonLinkOnClick={buttonLinkOnClick} />,
