@@ -3,8 +3,10 @@ import { ethers } from "ethers"
 import { Image, Row, Col, Button } from 'react-bootstrap'
 import getTimeLeftString from './TimeOperation'
 import goose from './assets/Goose.png'
+import leftArrow from './assets/left_arrow.svg'
 
-const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentItemIndex, tokenAllowance, setTokenAllowance}) => {
+const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentItemIndex, tokenAllowance, 
+                setTokenAllowance, setCurrentItemIndex}) => {
     const [duration, setDuration] = useState(0)
     
     const stakeGoose = async(useTalefly) => {
@@ -43,6 +45,11 @@ const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentI
         if (items == null)
             return "Loading..."
         return "You don't have a Goose!"
+    }
+
+    const nextPage = (direction) => {
+        console.log("nextPage", direction)
+        setCurrentItemIndex(currentItemIndex + direction)
     }
 
     return (
@@ -103,6 +110,16 @@ const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentI
                                         </div>
                                     )}
                                 </Col>
+
+                                {/* PAGINATION ARROWS */}
+                                <div className="arrowsDiv">
+                                    {currentItemIndex > 0 ? (
+                                            <div className={"leftArrow"} onClick={() => nextPage(-1)}></div>
+                                    ) : ( <></> )}
+                                    {items != null && currentItemIndex < items.length - 1 ? (
+                                            <div className={"rightArrow"} onClick={() => nextPage(1)}></div>
+                                    ) : ( <></> )}
+                                </div>
                             </>
                         )}
                     </>

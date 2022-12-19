@@ -244,14 +244,14 @@ function App() {
             <Home beanBalance={beanBalance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu}
               beanToUse={beanToUse} timeleft={timeleft} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} 
               items={items} currentItemIndex={currentItemIndex} tokenAllowance={tokenAllowance} 
-              tokenEgg={tokenEgg} setTokenAllowance={setTokenAllowance} account={account} >
+              tokenEgg={tokenEgg} setTokenAllowance={setTokenAllowance} account={account} setCurrentItemIndex={setCurrentItemIndex} >
             </Home>
           } />
           <Route path="/tester" element={
             <Home beanBalance={beanBalance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu}
               beanToUse={beanToUse} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} 
               items={items} currentItemIndex={currentItemIndex} tokenAllowance={tokenAllowance} 
-              tokenEgg={tokenEgg} setTokenAllowance={setTokenAllowance} account={account} >
+              tokenEgg={tokenEgg} setTokenAllowance={setTokenAllowance} account={account} setCurrentItemIndex={setCurrentItemIndex} >
             </Home>
           } />
         </Routes>

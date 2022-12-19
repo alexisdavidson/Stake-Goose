@@ -288,6 +288,27 @@ a:link, a:visited, a:hover, a:active {
   cursor: default;
 }
 
+.leftArrow, .rightArrow {
+  /* background-color: rgb(.5,.5,.5,.5); */
+  background-image: url("./assets/left_arrow.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center; 
+  overflow: hidden;
+  position: absolute;
+  left: 5%;
+  width: 12%;
+  height: 30%;
+  bottom: 30%;
+}
+.rightArrow {
+  transform: rotate(180deg);
+  left: 85%;
+}
+.leftArrow:hover, .rightArrow:hover {
+  cursor: pointer;
+}
+
 
 
 

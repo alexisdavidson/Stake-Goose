@@ -4,7 +4,7 @@ import { Image, Row, Col, Button } from 'react-bootstrap'
 import getTimeLeftString from './TimeOperation'
 import goose from './assets/Goose.png'
 
-const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex, beanNft, beanToUse}) => {
+const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex, beanNft, beanToUse, setCurrentItemIndex}) => {
     const feedGoose = async() => {
         console.log("Feed Goose button", currentItemIndex)
         
@@ -16,6 +16,11 @@ const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex, beanNf
         if (items == null)
             return "Loading..."
         return "You don't have a Goose!"
+    }
+
+    const nextPage = (direction) => {
+        console.log("nextPage", direction)
+        setCurrentItemIndex(currentItemIndex + direction)
     }
 
     return (
@@ -53,6 +58,16 @@ const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex, beanNf
                                         </div>
                                     )}
                                 </Col>
+
+                                {/* PAGINATION ARROWS */}
+                                <div className="arrowsDiv">
+                                    {currentItemIndex > 0 ? (
+                                            <div className={"leftArrow"} onClick={() => nextPage(-1)}></div>
+                                    ) : ( <></> )}
+                                    {items != null && currentItemIndex < items.length - 1 ? (
+                                            <div className={"rightArrow"} onClick={() => nextPage(1)}></div>
+                                    ) : ( <></> )}
+                                </div>
                             </>
                         )}
                     </>
