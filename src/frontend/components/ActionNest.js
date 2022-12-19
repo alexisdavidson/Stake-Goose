@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { ethers } from "ethers"
 import { Image, Row, Col, Button } from 'react-bootstrap'
-import getTimeLeftString from './TimeOperation'
+import { getTimeLeftString, getTimeLeftStringStartDuration } from './TimeOperation'
 import goose from './assets/Goose.png'
 import leftArrow from './assets/left_arrow.svg'
 
 const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentItemIndex, tokenAllowance, 
-                setTokenAllowance, setCurrentItemIndex}) => {
+                setTokenAllowance, setCurrentItemIndex, currentTimestamp}) => {
     const [duration, setDuration] = useState(0)
     
     const stakeGoose = async(useTalefly) => {
@@ -104,9 +104,9 @@ const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentI
                                             </div>
                                         </>
                                     ) : (
-                                        <div className="gooseDescriptionFeedButtonSmall" >
+                                        <div className="gooseDescriptionFeedButton" >
                                             2 GOLD EGGS
-                                            <br/>COLLECT IN 06:24:00:00
+                                            <br/>COLLECT IN {getTimeLeftStringStartDuration(currentTimestamp, items[currentItemIndex].startTimestamp, items[currentItemIndex].duration)}
                                         </div>
                                     )}
                                 </Col>

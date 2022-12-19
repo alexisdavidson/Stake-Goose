@@ -7,7 +7,12 @@ const units = {
     minute: 60000,
     second: 1000,
 }
-const getTimeLeftString = (timestampRelative) => {
+export const getTimeLeftStringStartDuration = (currentTimestamp, startTimestamp, duration) => {
+    console.log("getTimeLeftStringStartDuration", startTimestamp, duration, currentTimestamp)
+    return getTimeLeftString(startTimestamp + duration - currentTimestamp)
+}
+
+export const getTimeLeftString = (timestampRelative) => {
     const daysLeft = Math.floor(timestampRelative / units.day)
     timestampRelative -= daysLeft * units.day
 
@@ -21,4 +26,3 @@ const getTimeLeftString = (timestampRelative) => {
 
     return zeroPad(daysLeft, 2) + ":" + zeroPad(hoursLeft, 2) + ":" + zeroPad(minsLeft, 2) + ":" + zeroPad(secsLeft, 2) + "";
 }
-export default getTimeLeftString

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { ethers } from "ethers"
 import { Image, Row, Col, Button } from 'react-bootstrap'
-import getTimeLeftString from './TimeOperation'
+import { getTimeLeftString } from './TimeOperation'
 import goose from './assets/Goose.png'
 
 const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex, beanNft, beanToUse, setCurrentItemIndex}) => {
