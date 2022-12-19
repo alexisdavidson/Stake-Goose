@@ -138,6 +138,7 @@ a:link, a:visited, a:hover, a:active {
 .gooseDescriptionFeedButtonSmall {
   margin-top: 3vh;
   font-size: 1.5rem;
+  padding-right: 3rem;
 }
 
 .actionButton, .actionButtonNest, .shortButton, .longButton, .mobileMenuButton, .longMobileButton {
@@ -297,14 +298,14 @@ a:link, a:visited, a:hover, a:active {
   background-position: center center; 
   overflow: hidden;
   position: absolute;
-  left: 5%;
+  left: 10%;
   width: 6%;
   height: 20%;
   bottom: 35%;
 }
 .rightArrow {
   transform: rotate(180deg);
-  left: 90%;
+  left: 85%;
 }
 .leftArrow:hover, .rightArrow:hover {
   cursor: pointer;
@@ -318,6 +319,9 @@ a:link, a:visited, a:hover, a:active {
 .leftArrow, .rightArrow {
   width: 8%;
   height: 20%;
+}
+.rightArrow {
+  left: 80%;
 }
 .gooseNestSelectDays {
   margin-bottom: 1vh;
