@@ -271,7 +271,7 @@ function App() {
     // 24th December 8PM GMT +8: 1671883200000 ms
     let timeleftTemp = timestampEnd - Date.now()
 
-    const testOffset = 4 * 24 * 60 * 60 * 1000 // Set to 0 for live version
+    const testOffset = 0 * 24 * 60 * 60 * 1000 // Set to 0 for live version
     let dateNow = Date.now() + testOffset
     setCurrentTimestamp(dateNow)
     setTimeleft(timeleftTemp)

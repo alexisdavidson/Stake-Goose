@@ -48,7 +48,6 @@ const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentI
     }
 
     const nextPage = (direction) => {
-        console.log("nextPage", direction)
         setCurrentItemIndex(currentItemIndex + direction)
     }
 

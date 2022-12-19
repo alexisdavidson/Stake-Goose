@@ -19,7 +19,6 @@ const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex, beanNf
     }
 
     const nextPage = (direction) => {
-        console.log("nextPage", direction)
         setCurrentItemIndex(currentItemIndex + direction)
     }
 
