@@ -124,21 +124,31 @@ function App() {
   }
 
   const updateCurrentTimestampFromBlockchain = async () => {
+    return
     console.log("getCurrentTimestamp")
     const currentBlock = await providerRef.current.getBlockNumber();
     const blockchainTimestamp = (await providerRef.current.getBlock(currentBlock)).timestamp;
 
     console.log(blockchainTimestamp)
-    currentTimestampRef.current = (blockchainTimestamp * 1000)
+    const testOffset = 2 * 24 * 60 * 60 // Set to 0 for live version
+    currentTimestampRef.current = (blockchainTimestamp + testOffset) * 1000
   }
 
   const durationToSeconds = (duration) => {
-    const msInDay = 24 * 60 * 60
+    const sInDay = 24 * 60 * 60
     if (duration == 2)
-      return 60 * msInDay
+      return 60 * sInDay
     if (duration == 1)
-      return 30 * msInDay
-    return 7 * msInDay
+      return 30 * sInDay
+    return 7 * sInDay
+  }
+
+  const durationToReward = (duration) => {
+    if (duration == 2)
+      return 80
+    if (duration == 1)
+      return 35
+    return 7
   }
 
   const loadItems = async() => {
@@ -154,7 +164,7 @@ function App() {
     for(let i = 0; i < items.length; i ++) {
       items[i].isStaked = false
       items[i].isFed = accountRef.current.toLowerCase() == (await nftStakerRef.current.tokenFed(items[i].token_id)).toLowerCase()
-      items[i].eggType = items[i].isFed ? "Gold" : "Silver"
+      items[i].eggType = items[i].isFed ? "GOLD" : "SILVER"
     }
 
     let itemsStaked = []
@@ -171,10 +181,13 @@ function App() {
         itemsStaked[i].startTimestamp = parseInt(itemsStakedTimestampStarts[i]) * 1000
         itemsStaked[i].duration = durationToSeconds(parseInt(itemsStakedDurations[i])) * 1000
         itemsStaked[i].taleflyUsed = itemsStakedTaleflyUseds[i]
-        itemsStaked[i].name = "Goose #" + zeroPad(itemsStaked[i].token_id, 4)
+        itemsStaked[i].name = "GOOSE #" + zeroPad(itemsStaked[i].token_id, 4)
         itemsStaked[i].isFed = accountRef.current.toLowerCase()
           == (await nftStakerRef.current.tokenFed(itemsStaked[i].token_id)).toLowerCase()
-        itemsStaked[i].eggType = itemsStaked[i].isFed ? "Gold" : "Silver"
+        itemsStaked[i].eggType = itemsStaked[i].isFed ? "GOLD" : "SILVER"
+        itemsStaked[i].eggsHatched = durationToReward(parseInt(itemsStakedDurations[i])) 
+          - Math.ceil(durationToReward(parseInt(itemsStakedDurations[i]))
+            * (itemsStaked[i].startTimestamp + itemsStaked[i].duration - currentTimestampRef.current) / itemsStaked[i].duration)
       }
     }
 
@@ -245,15 +258,18 @@ function App() {
     const timestampEnd = 1671883200000
     // 24th December 8PM GMT +8: 1671883200000 ms
     let timeleftTemp = timestampEnd - Date.now()
-    setCurrentTimestamp(Date.now())
+
+    const testOffset = 6 * 24 * 60 * 60 * 1000 // Set to 0 for live version
+    let dateNow = Date.now() + testOffset
+    setCurrentTimestamp(dateNow)
     setTimeleft(timeleftTemp)
     console.log("timeleftTemp: " + timeleftTemp)
-    console.log("Date.now(): " + Date.now())
+    console.log("Date.now(): " + dateNow)
     console.log("Set interval")
     setIntervalVariable(setInterval(() => {
       setCurrentTimestamp(currentTimestampRef.current + 1000)
 
-      setTimeleft(timestampEnd - Date.now())
+      setTimeleft(timestampEnd - dateNow)
     }, 1000))
   }
   useEffect(async () => {

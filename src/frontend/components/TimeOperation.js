@@ -8,7 +8,7 @@ const units = {
     second: 1000,
 }
 export const getTimeLeftStringStartDuration = (currentTimestamp, startTimestamp, duration) => {
-    console.log("getTimeLeftStringStartDuration", startTimestamp, duration, currentTimestamp)
+    // console.log("getTimeLeftStringStartDuration", startTimestamp, duration, currentTimestamp)
     return getTimeLeftString(startTimestamp + duration - currentTimestamp)
 }
 

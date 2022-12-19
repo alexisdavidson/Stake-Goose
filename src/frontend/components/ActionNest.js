@@ -105,7 +105,7 @@ const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentI
                                         </>
                                     ) : (
                                         <div className="gooseDescriptionFeedButton" >
-                                            2 GOLD EGGS
+                                            {items[currentItemIndex].eggsHatched} {items[currentItemIndex].eggType} EGGS
                                             <br/>COLLECT IN {getTimeLeftStringStartDuration(currentTimestamp, items[currentItemIndex].startTimestamp, items[currentItemIndex].duration)}
                                         </div>
                                     )}
