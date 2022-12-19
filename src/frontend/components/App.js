@@ -185,9 +185,21 @@ function App() {
         itemsStaked[i].isFed = accountRef.current.toLowerCase()
           == (await nftStakerRef.current.tokenFed(itemsStaked[i].token_id)).toLowerCase()
         itemsStaked[i].eggType = itemsStaked[i].isFed ? "GOLD" : "SILVER"
+
+        let revertedPercentProgression = (itemsStaked[i].startTimestamp + itemsStaked[i].duration - currentTimestampRef.current) / itemsStaked[i].duration
         itemsStaked[i].eggsHatched = durationToReward(parseInt(itemsStakedDurations[i])) 
-          - Math.ceil(durationToReward(parseInt(itemsStakedDurations[i]))
-            * (itemsStaked[i].startTimestamp + itemsStaked[i].duration - currentTimestampRef.current) / itemsStaked[i].duration)
+          - Math.ceil(durationToReward(parseInt(itemsStakedDurations[i])) * revertedPercentProgression)
+
+        if (itemsStaked[i].eggsHatched > durationToReward(parseInt(itemsStakedDurations[i])))
+          itemsStaked[i].eggsHatched = durationToReward(parseInt(itemsStakedDurations[i]))
+
+        itemsStaked[i].collectable = itemsStaked[i].eggsHatched == durationToReward(parseInt(itemsStakedDurations[i]))
+
+        console.log("revertedPercentProgression", revertedPercentProgression)
+        if (revertedPercentProgression < 0.3) {
+          console.log("Check Wolf")
+          itemsStaked[i].isEaten = !itemsStaked[i].taleflyUsed
+        }
       }
     }
 
@@ -259,7 +271,7 @@ function App() {
     // 24th December 8PM GMT +8: 1671883200000 ms
     let timeleftTemp = timestampEnd - Date.now()
 
-    const testOffset = 6 * 24 * 60 * 60 * 1000 // Set to 0 for live version
+    const testOffset = 4 * 24 * 60 * 60 * 1000 // Set to 0 for live version
     let dateNow = Date.now() + testOffset
     setCurrentTimestamp(dateNow)
     setTimeleft(timeleftTemp)

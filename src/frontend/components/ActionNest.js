@@ -104,10 +104,29 @@ const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentI
                                             </div>
                                         </>
                                     ) : (
+                                        items[currentItemIndex].isEaten ? (
                                         <div className="gooseDescriptionFeedButton" >
-                                            {items[currentItemIndex].eggsHatched} {items[currentItemIndex].eggType} EGGS
-                                            <br/>COLLECT IN {getTimeLeftStringStartDuration(currentTimestamp, items[currentItemIndex].startTimestamp, items[currentItemIndex].duration)}
+                                            <br/>This goose has been eaten by a wolf...
                                         </div>
+                                        
+                                        ) : (
+                                            items[currentItemIndex].collectable ? (
+                                                <>
+                                                    <div className="gooseDescriptionFeedButton" >
+                                                        {items[currentItemIndex].eggsHatched} {items[currentItemIndex].eggType} EGGS
+                                                    </div>
+                                                    <div className="actionButtonNest" onClick={() => unstakeGoose()} >
+                                                        COLLECT
+                                                    </div>
+                                                </>
+                                            
+                                            ) : (
+                                                <div className="gooseDescriptionFeedButton" >
+                                                    {items[currentItemIndex].eggsHatched} {items[currentItemIndex].eggType} EGGS
+                                                    <br/>COLLECT IN {getTimeLeftStringStartDuration(currentTimestamp, items[currentItemIndex].startTimestamp, items[currentItemIndex].duration)}
+                                                </div>
+                                            )
+                                        )
                                     )}
                                 </Col>
 
