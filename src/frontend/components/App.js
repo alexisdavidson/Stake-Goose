@@ -36,7 +36,6 @@ function App() {
   const [provider, setProvider] = useState({})
   const [intervalVariable, setIntervalVariable] = useState(null)
   const [beanToUse, setBeanToUse] = useState(0)
-  const [tokenAllowance, setTokenAllowance] = useState(0)
   const [items, setItems] = useState(null)
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
 
@@ -82,7 +81,6 @@ function App() {
     await loadContracts(accounts[0])
 
     setBeanBalance(parseInt(await beanNftRef.current.balanceOf(accounts[0])))
-    setTokenAllowance(parseInt(await tokenEggRef.current.allowance(accounts[0], nftStakerRef.current.address)))
   }
 
   const loadOpenSeaBeanToUse = async (acc, nft) => {
@@ -123,17 +121,6 @@ function App() {
     return items
   }
 
-  const updateCurrentTimestampFromBlockchain = async () => {
-    return
-    console.log("getCurrentTimestamp")
-    const currentBlock = await providerRef.current.getBlockNumber();
-    const blockchainTimestamp = (await providerRef.current.getBlock(currentBlock)).timestamp;
-
-    console.log(blockchainTimestamp)
-    const testOffset = 2 * 24 * 60 * 60 // Set to 0 for live version
-    currentTimestampRef.current = (blockchainTimestamp + testOffset) * 1000
-  }
-
   const durationToSeconds = (duration) => {
     const sInDay = 24 * 60 * 60
     if (duration == 2)
@@ -154,7 +141,6 @@ function App() {
   const loadItems = async() => {
     setItems(null)
     console.log("loadItems")
-    updateCurrentTimestampFromBlockchain()
 
     await loadOpenSeaBeanToUse(accountRef.current, beanNftRef.current)
     await new Promise(r => setTimeout(r, 1000));
@@ -301,16 +287,16 @@ function App() {
           <Route path="/" element={
             <Home beanBalance={beanBalance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu}
               beanToUse={beanToUse} timeleft={timeleft} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} 
-              items={items} currentItemIndex={currentItemIndex} tokenAllowance={tokenAllowance} 
-              tokenEgg={tokenEgg} setTokenAllowance={setTokenAllowance} account={account} setCurrentItemIndex={setCurrentItemIndex} 
+              items={items} currentItemIndex={currentItemIndex} 
+              tokenEgg={tokenEgg} account={account} setCurrentItemIndex={setCurrentItemIndex} 
               currentTimestamp={currentTimestamp} >
             </Home>
           } />
           <Route path="/tester" element={
             <Home beanBalance={beanBalance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu}
               beanToUse={beanToUse} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} 
-              items={items} currentItemIndex={currentItemIndex} tokenAllowance={tokenAllowance} 
-              tokenEgg={tokenEgg} setTokenAllowance={setTokenAllowance} account={account} setCurrentItemIndex={setCurrentItemIndex} 
+              items={items} currentItemIndex={currentItemIndex} 
+              tokenEgg={tokenEgg} account={account} setCurrentItemIndex={setCurrentItemIndex} 
               currentTimestamp={currentTimestamp} >
             </Home>
           } />

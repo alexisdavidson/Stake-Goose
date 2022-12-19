@@ -17,7 +17,7 @@ const fromWei = (num) => ethers.utils.formatEther(num)
 const toWei = (num) => ethers.utils.parseEther(num.toString())
 
 const Home = ({ account, beanBalance, closeMenu, toggleMenu, menu, beanToUse, timeleft, nftStaker, items, currentItemIndex, 
-    tokenAllowance, tokenEgg, gooseNft, setTokenAllowance, beanNft, setCurrentItemIndex, currentTimestamp}) => {
+    tokenEgg, gooseNft, beanNft, setCurrentItemIndex, currentTimestamp}) => {
 
     const buttonLinkOnClick = async (elementId) => {
         console.log("buttonLinkOnClick: " + elementId)
@@ -94,9 +94,9 @@ const Home = ({ account, beanBalance, closeMenu, toggleMenu, menu, beanToUse, ti
                 '0': <></>,
                 '2': <HowTo />,
                 '4': <Nest timeleft={timeleft} nftStaker={nftStaker} items={items} currentItemIndex={currentItemIndex} 
-                    tokenAllowance={tokenAllowance} tokenEgg={tokenEgg} gooseNft={gooseNft} setTokenAllowance={setTokenAllowance} 
+                    tokenEgg={tokenEgg} gooseNft={gooseNft}
                     account={account} setCurrentItemIndex={setCurrentItemIndex} currentTimestamp={currentTimestamp} />,
-                '5': <Feed timeleft={timeleft} beanBalance={beanBalance} nftStaker={nftStaker} 
+                '5': <Feed account={account} timeleft={timeleft} beanBalance={beanBalance} nftStaker={nftStaker} 
                     items={items} currentItemIndex={currentItemIndex} beanToUse={beanToUse} beanNft={beanNft}
                     setCurrentItemIndex={setCurrentItemIndex} />,
                 '6': <Social />,

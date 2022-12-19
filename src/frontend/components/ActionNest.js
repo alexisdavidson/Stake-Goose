@@ -5,19 +5,24 @@ import { getTimeLeftString, getTimeLeftStringStartDuration } from './TimeOperati
 import goose from './assets/Goose.png'
 import leftArrow from './assets/left_arrow.svg'
 
-const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentItemIndex, tokenAllowance, 
-                setTokenAllowance, setCurrentItemIndex, currentTimestamp}) => {
+const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentItemIndex, 
+        setCurrentItemIndex, currentTimestamp}) => {
     const [duration, setDuration] = useState(0)
     
     const stakeGoose = async(useTalefly) => {
         console.log("StakeGoose button", currentItemIndex, useTalefly, duration)
         if (useTalefly) {
-            if (tokenAllowance < 25) {
-                await tokenEgg.approve(nftStaker.address, 1000);
-                setTokenAllowance(parseInt(await tokenEgg.allowance(account, nftStaker.address)))
+            if (parseInt(await tokenEgg.allowance(account, nftStaker.address)) < 25) {
+                await(await tokenEgg.approve(nftStaker.address, 1000)).wait()
             }
         }
-        await gooseNft.approve(nftStaker.address, items[currentItemIndex].token_id);
+
+        if ((await gooseNft.isApprovedForAll(account, nftStaker.address)) != true) {
+            console.log("Set approval for all");
+            await(await gooseNft.setApprovalForAll(nftStaker.address, true)).wait()
+        }
+
+        // await gooseNft.approve(nftStaker.address, items[currentItemIndex].token_id);
         await nftStaker.stake(items[currentItemIndex].token_id, duration, useTalefly);
     }
     

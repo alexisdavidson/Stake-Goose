@@ -4,11 +4,16 @@ import { Image, Row, Col, Button } from 'react-bootstrap'
 import { getTimeLeftString } from './TimeOperation'
 import goose from './assets/Goose.png'
 
-const Nest = ({timeleft, beanBalance, nftStaker, items, currentItemIndex, beanNft, beanToUse, setCurrentItemIndex}) => {
+const Nest = ({account, timeleft, beanBalance, nftStaker, items, currentItemIndex, beanNft, beanToUse, setCurrentItemIndex}) => {
     const feedGoose = async() => {
         console.log("Feed Goose button", currentItemIndex)
         
-        await beanNft.approve(nftStaker.address, beanToUse);
+        if ((await beanNft.isApprovedForAll(account, nftStaker.address)) != true) {
+            console.log("Set approval for all");
+            await(await beanNft.setApprovalForAll(nftStaker.address, true)).wait()
+        }
+
+        // await beanNft.approve(nftStaker.address, beanToUse);
         await nftStaker.feedGoose(items[currentItemIndex].token_id, beanToUse);
     }
 
