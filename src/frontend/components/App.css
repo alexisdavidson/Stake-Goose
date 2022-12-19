@@ -297,13 +297,13 @@ a:link, a:visited, a:hover, a:active {
   overflow: hidden;
   position: absolute;
   left: 5%;
-  width: 12%;
-  height: 30%;
-  bottom: 30%;
+  width: 6%;
+  height: 20%;
+  bottom: 35%;
 }
 .rightArrow {
   transform: rotate(180deg);
-  left: 85%;
+  left: 90%;
 }
 .leftArrow:hover, .rightArrow:hover {
   cursor: pointer;
@@ -314,6 +314,10 @@ a:link, a:visited, a:hover, a:active {
 
 @media only screen and (max-width: 1199.98px){
   
+.leftArrow, .rightArrow {
+  width: 8%;
+  height: 20%;
+}
 .gooseNestSelectDays {
   margin-bottom: 1vh;
 }

@@ -59,6 +59,8 @@ function App() {
   const timeleftRef = useRef();
   timeleftRef.current = timeleft;
 
+  const zeroPad = (num, places) => String(num).padStart(places, '0')
+
   const closeMenu = () => {
       toggleMenu(0)
   }
@@ -153,16 +155,32 @@ function App() {
       let itemsStakedDurations = await nftStakerRef.current.getStakedDurations(accountRef.current)
       let itemsStakedTaleflyUseds = await nftStakerRef.current.getStakedTaleflyUsed(accountRef.current)
 
-      for(let i = 0; i < itemsStaked.length; i++) {
+      for(let i = 0; i < itemsStakedTokenIds.length; i++) {
+        itemsStaked.push({})
         itemsStaked[i].isStaked = true
         itemsStaked[i].token_id = parseInt(itemsStakedTokenIds[i])
+        itemsStaked[i].name = "Goose #" + zeroPad(itemsStaked[i].token_id, 4)
         itemsStaked[i].isFed = accountRef.current.toLowerCase()
           == (await nftStakerRef.current.tokenFed(itemsStaked[i].token_id)).toLowerCase()
         itemsStaked[i].eggType = itemsStaked[i].isFed ? "Gold" : "Silver"
       }
     }
 
-    // Optional Optimization: Remove all elements from the OpenSea list that are in the itemsStaked list
+    // Remove all elements from the OpenSea list that are in the itemsStaked list
+    for(let i = 0; i < items.length; i++) {
+      let alreadyInOpenSeaList = false
+      for(let j = 0; j < itemsStaked.length; j++) {
+        if (items[i].token_id == itemsStaked[j].token_id)
+          alreadyInOpenSeaList = true
+      }
+
+      if (alreadyInOpenSeaList) {
+        items[i] = items[items.length - 1]
+        items.pop()
+      }
+    }
+    console.log("itemsStaked")
+    console.log(itemsStaked)
     
     items = [...items, ...itemsStaked]
 
