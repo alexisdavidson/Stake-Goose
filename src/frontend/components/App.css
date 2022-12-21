@@ -323,6 +323,8 @@ a:link, a:visited, a:hover, a:active {
 
 .feedRightCol {
   padding-right: 0vh;
+  padding-left: 4vh;
+  padding-right: 4vh;
 }
 .leftArrow, .rightArrow {
   width: 8%;

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ethers } from "ethers"
 import { Image, Row, Col, Button } from 'react-bootstrap'
 
-const Menu = ({toggleMenu, buttonLinkOnClick}) => {
+const Menu = ({toggleMenu, buttonLinkOnClick, timeleft}) => {
 
     return (
         <Row className="actionFrame">
@@ -11,10 +11,10 @@ const Menu = ({toggleMenu, buttonLinkOnClick}) => {
                     <div className="mobileMenuButton" onClick={() => buttonLinkOnClick('openseaLink')}>OPENSEA</div>
                 </Row>
                 <Row className="m-0 p-0">
-                    <div className="mobileMenuButton" onClick={() => toggleMenu(4)}>NEST</div>
+                    <div className="mobileMenuButton" onClick={() => toggleMenu(4, timeleft == null)}>NEST</div>
                 </Row>
                 <Row className="m-0 p-0">
-                    <div className="mobileMenuButton" onClick={() => toggleMenu(5)}>FEED A BEAN</div>
+                    <div className="mobileMenuButton" onClick={() => toggleMenu(5, timeleft == null)}>FEED A BEAN</div>
                 </Row>
                 <Row className="m-0 p-0">
                     <div className="mobileMenuButton" onClick={() => toggleMenu(7)}>TALE TOKEN</div>

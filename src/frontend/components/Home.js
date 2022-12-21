@@ -101,7 +101,7 @@ const Home = ({ account, beanBalance, closeMenu, toggleMenu, menu, beanToUse, ti
                     setCurrentItemIndex={setCurrentItemIndex} />,
                 '6': <Social />,
                 '7': <TaleToken buttonLinkOnClick={buttonLinkOnClick} />,
-                '10': <Menu toggleMenu={toggleMenu} buttonLinkOnClick={buttonLinkOnClick} />,
+                '10': <Menu timeleft={timeleft} toggleMenu={toggleMenu} buttonLinkOnClick={buttonLinkOnClick} />,
                 }[menu]
             }
         </div>
