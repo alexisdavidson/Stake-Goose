@@ -68,7 +68,7 @@ async function main() {
   
   // Optional: Transfer tokens from team wallet to staker address
   const tokenEgg = new ethers.Contract(tokenEggAddress, TokenEggAbi.abi)
-  let stakerTokenBalance = 1_000; // How much to send?
+  let stakerTokenBalance = 275_000;
   await tokenEgg.connect(deployer).transfer(nftStaker.address, stakerTokenBalance);
   console.log("tokens transfered to nft staker")
 }

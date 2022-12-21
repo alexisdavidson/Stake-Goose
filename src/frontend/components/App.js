@@ -122,7 +122,9 @@ function App() {
   }
 
   const durationToSeconds = (duration) => {
-    const sInDay = 24 * 60 * 60
+    // const sInDay = 24 * 60 * 60 // Todo: Live
+    const sInDay = 60 // Test
+    
     if (duration == 2)
       return 60 * sInDay
     if (duration == 1)
