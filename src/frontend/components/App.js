@@ -255,8 +255,8 @@ function App() {
   }
   
   const iniTimer = () => {
-    const timestampEnd = 1671883200000
-    // 24th December 8PM GMT +8: 1671883200000 ms
+    const timestampEnd = 1671696000000
+    // 22th December 2PM GMT +8: 1671696000000 ms
     let timeleftTemp = timestampEnd - Date.now()
 
     const testOffset = 0 * 24 * 60 * 60 * 1000 // Set to 0 for live version
@@ -267,6 +267,7 @@ function App() {
     console.log("Date.now(): " + dateNow)
     console.log("Set interval")
     setIntervalVariable(setInterval(() => {
+      dateNow = Date.now() + testOffset
       setCurrentTimestamp(currentTimestampRef.current + 1000)
 
       setTimeleft(timestampEnd - dateNow)
