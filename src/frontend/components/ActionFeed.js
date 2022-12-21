@@ -46,20 +46,32 @@ const Nest = ({account, timeleft, beanBalance, nftStaker, items, currentItemInde
                                         <br/>EGG: {items[currentItemIndex].eggType}
                                     </div>
                                 </Col>
-                                <Col className="m-auto col-12 col-lg-6">
-                                    {!items[currentItemIndex].isFed ? (
-                                        <>
-                                            <div className="gooseDescriptionFeedButton" >
-                                                YOU HAVE {beanBalance} BEANS
-                                            </div>
-                                            <div className="actionButton" onClick={feedGoose} >
-                                                FEED
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <div className="gooseDescriptionFeedButtonSmall" >
-                                            GOOSE WAS FED WITH A BEAN. IT WILL LAYS GOLD EGGS NOW. THIS EFFECT IS VALID FOR ONE TIME STAKING ONLY. UNSTAKE, OR TRANSFER WILL CAUSE THIS EFFECT TO WEAR OFF!
+                                <Col className="m-auto col-12 col-lg-6 feedRightCol">
+                                    {items[currentItemIndex].isEaten ? (
+                                        <div className="gooseDescriptionFeedButton" >
+                                            <br/>This goose has been eaten by a wolf...
                                         </div>
+                                    ) : (
+                                        items[currentItemIndex].isStaked ? (
+                                            <div className="gooseDescriptionFeedButtonSmall" >
+                                                THIS GOOSE IS CURRENTLY STAKED
+                                            </div>
+                                        ) : (
+                                            !items[currentItemIndex].isFed ? (
+                                                <>
+                                                    <div className="gooseDescriptionFeedButton" >
+                                                        YOU HAVE {beanBalance} BEANS
+                                                    </div>
+                                                    <div className="actionButton feedButton" onClick={feedGoose} >
+                                                        FEED
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <div className="gooseDescriptionFeedButtonSmall" >
+                                                    GOOSE WAS FED WITH A BEAN. IT WILL LAYS GOLD EGGS NOW. THIS EFFECT IS VALID FOR ONE TIME STAKING ONLY. UNSTAKE, OR TRANSFER WILL CAUSE THIS EFFECT TO WEAR OFF!
+                                                </div>
+                                            )
+                                        )
                                     )}
                                 </Col>
 

@@ -77,7 +77,7 @@ const Nest = ({account, timeleft, nftStaker, gooseNft, tokenEgg, items, currentI
                                         <br/>EGG: {items[currentItemIndex].eggType}
                                     </div>
                                 </Col>
-                                <Col className="m-auto col-12 col-lg-6">
+                                <Col className="m-auto col-12 col-lg-6 feedRightCol">
                                     {!items[currentItemIndex].isStaked ? (
                                         <>
                                             <div className="actionButtonNest" onClick={() => stakeGoose(true)} >

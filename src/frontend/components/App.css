@@ -135,6 +135,10 @@ a:link, a:visited, a:hover, a:active {
   margin-bottom: 4vh;
 }
 
+.feedRightCol {
+  padding-right: 6vh;
+}
+
 .gooseDescriptionFeedButtonSmall {
   margin-top: 3vh;
   font-size: 1.5rem;
@@ -316,6 +320,10 @@ a:link, a:visited, a:hover, a:active {
 
 @media only screen and (max-width: 1199.98px){
   
+
+.feedRightCol {
+  padding-right: 0vh;
+}
 .leftArrow, .rightArrow {
   width: 8%;
   height: 20%;
