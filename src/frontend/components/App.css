@@ -315,6 +315,11 @@ a:link, a:visited, a:hover, a:active {
   cursor: pointer;
 }
 
+.gooseDescriptionFeedButtonSmallTalefly {
+  margin-left: 2vh;
+  color: red;
+  font-size: 1.5rem;
+}
 
 
 

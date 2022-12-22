@@ -53,9 +53,20 @@ const Nest = ({account, timeleft, beanBalance, nftStaker, items, currentItemInde
                                         </div>
                                     ) : (
                                         items[currentItemIndex].isStaked ? (
-                                            <div className="gooseDescriptionFeedButtonSmall" >
-                                                THIS GOOSE IS CURRENTLY STAKED
-                                            </div>
+                                            <>
+                                                <div className="gooseDescriptionFeedButtonSmall" >
+                                                    THIS GOOSE IS CURRENTLY STAKED
+                                                </div>
+                                                {items[currentItemIndex].taleflyUsed ? (
+                                                    <div className="gooseDescriptionFeedButtonSmallTalefly" >
+                                                        WITH TALEFLY
+                                                    </div>
+                                                ) : (
+                                                    <div className="gooseDescriptionFeedButtonSmallTalefly" >
+                                                        WITHOUT TALEFLY
+                                                    </div>
+                                                )}
+                                            </>
                                         ) : (
                                             !items[currentItemIndex].isFed ? (
                                                 <>
