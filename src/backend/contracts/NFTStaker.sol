@@ -109,8 +109,7 @@ contract NFTStaker is ERC721Holder, ReentrancyGuard, Ownable {
         (uint256 _tokenIndex, bool _foundIndex) = findIndexForTokenStaker(_tokenId, msg.sender);
         require(_foundIndex, "Index not found for this staker.");
 
-        // Todo: replace 60 with 86400
-        require(block.timestamp > _staker.timestampStarts[_tokenIndex] + durations[_staker.durations[_tokenIndex]].daysCount * 60, 
+        require(block.timestamp > _staker.timestampStarts[_tokenIndex] + durations[_staker.durations[_tokenIndex]].daysCount * 86400, 
             "Cannot unstake before the end of the staking duration.");
         require(_staker.taleflyUsed[_tokenIndex], "Cannot unstake eaten goose.");
 

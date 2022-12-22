@@ -84,7 +84,7 @@ function App() {
   }
 
   const loadOpenSeaBeanToUse = async (acc, nft) => {
-    let items = await fetch(`${configContract.OPENSEA_API_TESTNETS}/assets?owner=${acc}&asset_contract_address=${nft.address}&format=json`)
+    let items = await fetch(`${configContract.OPENSEA_API}/assets?owner=${acc}&asset_contract_address=${nft.address}&format=json`)
     .then((res) => res.json())
     .then((res) => {
       return res.assets
@@ -106,7 +106,7 @@ function App() {
   }
 
   const loadOpenSeaNftGooses = async (acc, nft) => {
-    let items = await fetch(`${configContract.OPENSEA_API_TESTNETS}/assets?owner=${acc}&asset_contract_address=${nft.address}&format=json`)
+    let items = await fetch(`${configContract.OPENSEA_API}/assets?owner=${acc}&asset_contract_address=${nft.address}&format=json`)
     .then((res) => res.json())
     .then((res) => {
       return res.assets
@@ -122,8 +122,8 @@ function App() {
   }
 
   const durationToSeconds = (duration) => {
-    // const sInDay = 24 * 60 * 60 // Todo: Live
-    const sInDay = 60 // Test
+    const sInDay = 24 * 60 * 60 // Todo: Live
+    // const sInDay = 60 // Test
     
     if (duration == 2)
       return 60 * sInDay
@@ -288,14 +288,6 @@ function App() {
       <div className="App" id="wrapper">
         <Routes>
           <Route path="/" element={
-            <Home beanBalance={beanBalance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu}
-              beanToUse={beanToUse} timeleft={timeleft} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} 
-              items={items} currentItemIndex={currentItemIndex} 
-              tokenEgg={tokenEgg} account={account} setCurrentItemIndex={setCurrentItemIndex} 
-              currentTimestamp={currentTimestamp} >
-            </Home>
-          } />
-          <Route path="/tester" element={
             <Home beanBalance={beanBalance} closeMenu={closeMenu} toggleMenu={toggleMenu} menu={menu}
               beanToUse={beanToUse} beanNft={beanNft} gooseNft={gooseNft} nftStaker={nftStaker} 
               items={items} currentItemIndex={currentItemIndex} 
