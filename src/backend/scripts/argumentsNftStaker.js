@@ -1,5 +1,5 @@
 module.exports = [
-    "0x46Ce726522BEc0c410D8896ba16A330B416f1cf0", // nft goose address
-    "0x84e6668a2dFAB9Fe137F3350C10E0A1108BEeDB9", // bean address
+    "0x1fD9fB121571BA1Ece666491f594da657216E3EC", // nft goose address
+    "0xa75689d2a5329acfc70dc6f8f2de7ddfbb4eadb9", // bean address
     "0x000000000000000000000000000000000000dEaD" // wolf address
 ];
